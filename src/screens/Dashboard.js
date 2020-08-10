@@ -1,49 +1,26 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Swiper from 'react-native-swiper'
-
-function Dashboard({ navigation }) {
-
-    return (
-        <Swiper style={styles.wrapper} horizontal={false} >
-            <View style={styles.slide1}>
-                <Text style={styles.text}>PHANINDRA</Text>
-            </View>
-            <View style={styles.slide2}>
-                <Text style={styles.text}>Beautiful</Text>
-            </View>
-            <View style={styles.slide3}>
-                <Text style={styles.text}>And simple</Text>
-            </View>
-        </Swiper>
-    )
+import React from "react";
+import {Text,View,StyleSheet} from "react-native";
+import Video from 'react-native-video';
+export default class Dashboard extends React.Component {
+render(){
+return(
+<View style={styles.container}>
+      <Video source={require('../../assests/a.mp4')}   
+       ref={(ref) => {
+         this.player = ref
+       }}                                    
+       onBuffer={this.onBuffer}               
+       onEnd={this.onEnd}                     
+       onError={this.videoError}               
+       style={styles.backgroundVideo} />
+</View>
+);
 }
-
-export default Dashboard
-
+}
 const styles = StyleSheet.create({
-    wrapper: {},
-    slide1: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor: '#9DD6EB'
-    },
-    slide2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#97CAE5'
-    },
-    slide3: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#92BBD9'
-    },
-    text: {
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold'
-    }
-})
+  container:{ width:'100%',height:'100%',},
+  backgroundVideo: {
+    width:'100%',
+    height:'100%'
+  },
+});
