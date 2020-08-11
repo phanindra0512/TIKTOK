@@ -13,6 +13,7 @@ import SettingsScreen from './src/screens/SettingsScreen'
 import Search from './src/screens/Search'
 import Create from './src/screens/Create';
 import Notification from './src/screens/Notification'
+import TestHome from './src/screens/TestHome';
 
 const Stack = createStackNavigator()
 const Tab = createMaterialBottomTabNavigator();
