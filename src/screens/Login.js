@@ -10,6 +10,7 @@ function Login({ navigation }) {
         <View style={{ flex: 1,alignItems:'center',justifyContent:'center' }}>
            <Text>Login Screen</Text>
             <Button mode='contained' onPress={()=>navigation.navigate('Dashboard')}>Login</Button>
+
            <Text style={{fontSize:20,fontWeight:'bold'}} onPress={()=>navigation.navigate('Signup')}>Signup</Text> 
         </View>
     )

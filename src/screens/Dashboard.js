@@ -2,76 +2,73 @@ import React from 'react'
 import { View, Text, StyleSheet, Dimensions, SafeAreaView, TouchableOpacity } from 'react-native'
 import Video from 'react-native-video';
 import Swiper from 'react-native-swiper'
+import { ScrollView } from 'react-native-gesture-handler';
+import Sidebar from './Sidebar';
+import Info from './InfoDashboard';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-// const videoData = [
-//     {
-//         videoURL: require('../../videos/sample1.mp4')
-//     },
-//     {
-//         videoURL: require('../../videos/sample2.mp4')
-//     },
-//     {
-//         videoURL: require('../../videos/sample3.mp4')
-//     }
-// ]
+const videoData = [
+    {
+        videoURL: require('../../assests/b.mp4')
+    },
+    {
+      videoURL: require('../../assests/c.mp4')
+  },
+  {
+    videoURL: require('../../assests/d.mp4')
+},
+
+   
+]
 function Dashboard() {
     return (
-        <Swiper style={styles.wrapper} showsPagination={false} horizontal={false} showsButtons={false}>
-            {/* {videoData.map((singleVideo, index) => {
-                <SafeAreaView>
-                    <TouchableOpacity>
-                        <Video
-                            resizeMode="cover"
-                            repeat
-                            source={singleVideo.videoURL}
-                            style={{ width: screenWidth, height: screenHeight }}
-                            fullscreen={true}
+      <Swiper style={styles.wrapper} showsPagination={false} horizontal={false} showsButtons={false}>
 
-                        />
-                    </TouchableOpacity>
-                </SafeAreaView>
-            })} */}
-            <View style={styles.slide1}>
-                <Video source={{ uri: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4' }}
-                    // ref={(ref) => {
-                    //     this.player = ref
-                    // }}
-                    // fullscreen={true}
-                    // onBuffer={this.onBuffer}
-                    // onEnd={this.onEnd}
-                    // onError={this.videoError}
-                    onFullscreenPlayerWillPresent={self.fullScreenPlayerWillPresent}
-                    onFullscreenPlayerDidPresent={self.fullScreenPlayerDidPresent}
-                    onFullscreenPlayerWillDismiss={self.fullScreenPlayerWillDismiss}
-                    onFullscreenPlayerDidDismiss={self.fullScreenPlayerDidDissmiss}
-                    onLoadStart={self.loadStart}
-                    onLoad={self.setDuration}
-                    onProgress={self.setTime}
-                    onTimedMetadata={self.onTimedMetadata}
-                    resizeMode={"cover"}
-                    style={{
-                        aspectRatio: 1,
-                        width: "100%",
-                        height: '100%'
-                    }}
-                />
-                <Text style={styles.text}>Phanindra</Text>
-            </View>
-        </Swiper>
-    )
+         {
+                                videoData.map((Item, index) => {
+                                    return (
+                                      <View style={styles.slide1} key={index}>
+                                      <Video source={Item.videoURL}
+                                          
+                                          onFullscreenPlayerWillPresent={self.fullScreenPlayerWillPresent}
+                                          onFullscreenPlayerDidPresent={self.fullScreenPlayerDidPresent}
+                                          onFullscreenPlayerWillDismiss={self.fullScreenPlayerWillDismiss}
+                                          onFullscreenPlayerDidDismiss={self.fullScreenPlayerDidDissmiss}
+                                          onLoadStart={self.loadStart}
+                                          onLoad={self.setDuration}
+                                          onProgress={self.setTime}
+                                          onTimedMetadata={self.onTimedMetadata}
+                                          resizeMode={"cover"}
+                                          style={{
+                                              aspectRatio: 1,
+                                              width: "100%",
+                                              height: '100%'
+                                          }}
+                                      />
+<Sidebar/>
+<Info/>
+
+                                  </View>
+
+                                    )
+                                })
+                            }
+      </Swiper>
+            )
 }
 
 export default Dashboard
 
 const styles = StyleSheet.create({
-    wrapper: { flex: 1 },
+    wrapper: { width:'100%',height:'100%',alignItems:'center',justifyContent:'center'},
     slide1: {
         flex: 1,
         width: '100%',
-        height: '100%'
+        height: '100%',
+        alignItems:'center',
+        justifyContent:'center'
         // backgroundColor: '#9DD6EB'
     },
     background: {
