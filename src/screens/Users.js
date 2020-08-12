@@ -4,77 +4,77 @@ import {Button,Searchbar,Avatar} from 'react-native-paper';
 
 const usersListData=[
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/logo.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/logo.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',
         description:'No bio yet'
     },
     {
-        img: require('../../assests/tiktok.png'),
+        img: require('../../assests/tiktok.jpg'),
         title:'Telugu',
         subTitle:'@telugu',
         fans:'85.5k fans...',

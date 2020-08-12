@@ -23,7 +23,7 @@ export default class Create extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.headline}>Videos</Text>
+        <Text style={{fontSize:20,fontWeight:'bold'}}>Add Screen</Text>
        
       </View>
     );
@@ -33,7 +33,9 @@ export default class Create extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+  
+    alignItems:'center'
   },
   headline: {
     alignSelf: "center",

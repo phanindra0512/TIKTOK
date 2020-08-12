@@ -6,12 +6,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 function Sidebar() {
   return (
-    <View style={{flex: 0.45, justifyContent: 'center', position:'absolute',alignSelf:'flex-end',paddingRight:10,paddingTop:110}}>
+    <View style={{flex: 0.45, justifyContent: 'center', position:'absolute',alignSelf:'flex-end',paddingRight:10,paddingTop:220}}>
       <View style={{flex: 0.4, alignItems: 'center'}}>
         <Avatar.Image
           resizeMode="cover"
-          source={require('../../assests/tiktok.png')}
-          style={{borderColor: '#fff', borderWidth: 1}}
+          source={require('../../assests/tiktok.jpg')}
         />
         <Ionicons
           name="ios-add-circle-sharp"
@@ -22,7 +21,7 @@ function Sidebar() {
       </View>
       <View style={{flex: 0.4, alignItems: 'center',paddingTop:10}}>
         <View style={{flex: 0.5}}>
-          <Ionicons name="heart" color="white" size={45} />
+          <Ionicons name="heart" color="white" size={35} />
         </View>
         <View style={{flex: 0.1}}>
           <Text style={{color: 'white'}}>12.5K</Text>
@@ -30,7 +29,7 @@ function Sidebar() {
       </View>
       <View style={{flex: 0.4, alignItems: 'center',paddingTop:10}}>
         <View style={{flex: 0.5}}>
-          <AntDesign name="message1" color="white" size={45} />
+          <Ionicons name="chatbubble-ellipses" color="white" size={35} />
         </View>
         <View style={{flex: 0.1}}>
           <Text style={{color: 'white'}}>0</Text>
@@ -38,7 +37,7 @@ function Sidebar() {
       </View>
       <View style={{flex: 0.4, alignItems: 'center',paddingTop:10}}>
         <View style={{flex: 0.5}}>
-          <FontAwesome name="share" color="white" size={45} />
+          <FontAwesome name="share" color="white" size={35} />
         </View>
         <View style={{flex: 0.1}}>
           <Text style={{color: 'white'}}>998</Text>

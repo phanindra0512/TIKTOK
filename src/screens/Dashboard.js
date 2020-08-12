@@ -5,9 +5,14 @@ import Swiper from 'react-native-swiper'
 import { ScrollView } from 'react-native-gesture-handler';
 import Sidebar from './Sidebar';
 import Info from './InfoDashboard';
+import SwiperFlatList from 'react-native-swiper-flatlist';
+import Swipeout from 'react-native-swipeout';
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+import VerticalViewPager from "react-native-vertical-view-pager";
+
+const { width, height = height - 50 } = Dimensions.get("window");
+
+
 
 const videoData = [
     {
@@ -24,14 +29,18 @@ const videoData = [
 ]
 function Dashboard() {
     return (
-      <Swiper style={styles.wrapper} showsPagination={false} horizontal={false} showsButtons={false}>
+        <View  style={styles.wrapper}>
+        <VerticalViewPager showsVerticalScrollIndicator={false}
+        >
 
          {
                                 videoData.map((Item, index) => {
                                     return (
+
                                       <View style={styles.slide1} key={index}>
+
                                       <Video source={Item.videoURL}
-                                          
+                                          repeat
                                           onFullscreenPlayerWillPresent={self.fullScreenPlayerWillPresent}
                                           onFullscreenPlayerDidPresent={self.fullScreenPlayerDidPresent}
                                           onFullscreenPlayerWillDismiss={self.fullScreenPlayerWillDismiss}
@@ -40,11 +49,19 @@ function Dashboard() {
                                           onLoad={self.setDuration}
                                           onProgress={self.setTime}
                                           onTimedMetadata={self.onTimedMetadata}
-                                          resizeMode={"cover"}
+                                          rate={1.0}
+                  volume={1.0}
+                  isMuted={true}
+                  resizeMode="cover"
+                  shouldPlay
+                  bounce={false}
+                  isLooping
+                  useNativeControls={false}
                                           style={{
-                                              aspectRatio: 1,
-                                              width: "100%",
-                                              height: '100%'
+                                              aspectRatio:0.55,
+                                              width,
+                                              height:'100%',
+                                              marginBottom: 10
                                           }}
                                       />
 <Sidebar/>
@@ -52,17 +69,26 @@ function Dashboard() {
 
                                   </View>
 
+
+
                                     )
                                 })
                             }
-      </Swiper>
+                                  </VerticalViewPager>
+                                  </View>
             )
 }
 
 export default Dashboard
 
 const styles = StyleSheet.create({
-    wrapper: { width:'100%',height:'100%',alignItems:'center',justifyContent:'center'},
+    wrapper: { 
+        width: "100%",
+    height:"100%",
+    backgroundColor: "black",
+    zIndex: 1,
+    alignSelf: "stretch"
+    },
     slide1: {
         flex: 1,
         width: '100%',
