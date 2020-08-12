@@ -72,7 +72,7 @@ class VideoData extends Component {
             />
 
             <ImageBackground
-              source={require('../../assests/logo.png')}
+              source={require('../../assests/logo.jpg')}
               style={styles.profile}
               borderRadius={25}
               borderWidth={1}

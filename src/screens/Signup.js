@@ -10,7 +10,7 @@ function Signup({navigation}) {
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={{flex: 1.5, alignItems: 'center',paddingTop:20}}>
-        <Avatar.Image size={100} source={require('../../assests/tiktok.png')} />
+        <Avatar.Image size={100} source={require('../../assests/tiktok.jpg')} />
         <View style={{flex: 1,paddingTop:10}}>
           <Text style={{fontSize: 16, fontWeight: 'bold'}}>
             @narendrareddykandula6

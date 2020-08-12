@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import styled from 'styled-components/native'
 
 import Login from './src/screens/Login';
 import Signup from './src/screens/Signup'
@@ -23,7 +24,7 @@ function MyTabs() {
     <Tab.Navigator
       activeColor="#fff"
       inactiveColor="#fff"
-      barStyle={{ backgroundColor: '#888', }}
+      barStyle={{ backgroundColor: '#482B19'}}
     >
       <Tab.Screen name="Home" component={Dashboard}
         options={{
@@ -57,7 +58,7 @@ function MyTabs() {
           tabBarLabel: 'Notifications',
           tabBarBadge: true,
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="notification-clear-all" color={color} size={26} />
+            <MaterialIcons name="notifications-active" color={color} size={26} />
           ),
         }}
       />
