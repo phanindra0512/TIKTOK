@@ -11,8 +11,8 @@ function Login({ navigation }) {
             <Image source={require('../../assests/logo1.png')} style={{width:140,height:140,borderRadius:90}}/>
            
             <Button mode='contained' onPress={()=>navigation.navigate('Dashboard')} 
-            style={{marginTop:100}}
-             contentStyle={{ backgroundColor: '#0000ff', width: 120, borderRadius: 5 ,}}>Home</Button>
+            style={{marginTop:150}}
+             contentStyle={{ backgroundColor: '#0000ff', width: 130, borderRadius: 7 ,padding:5}}>Home</Button>
 
         </View>
     )
