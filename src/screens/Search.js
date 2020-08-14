@@ -10,7 +10,7 @@ function search() {
     return (
         <View style={{ flex: 1,  }}>
         <StatusBar translucent barStyle="light-content-content" backgroundColor="black" />
-        <View style={{flex:0.1,flexDirection:'row',paddingTop:40}}>
+        <View style={{flex:0.1,flexDirection:'row',paddingTop:35}}>
 <View style={{flex:0.5,alignSelf:'center'}}>
 <Feather name="chevron-left" size={25} style={{alignSelf:'flex-start',paddingLeft:20}} />
 
