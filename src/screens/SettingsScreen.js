@@ -12,7 +12,7 @@ function SettingsScreen() {
         <View style={{flex: 1, backgroundColor: '#fff'}}>
                   <StatusBar translucent barStyle="light-content-content" backgroundColor="#ccc" />
 
-            <View style={{flex:0.4,flexDirection:'row',paddingTop:40}}>
+            <View style={{flex:0.4,flexDirection:'row',paddingTop:35}}>
 <View style={{flex:0.4,}}>
 <Feather name="user-plus" size={25} style={{alignSelf:'flex-start',paddingLeft:20}} />
 
