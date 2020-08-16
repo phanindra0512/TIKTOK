@@ -15,6 +15,7 @@ import Search from './src/screens/Search'
 import Create from './src/screens/Create';
 import Notification from './src/screens/Notification'
 import TestHome from './src/screens/TestHome';
+import DoIt from './src/screens/DoIt';
 
 const Stack = createStackNavigator()
 const Tab = createMaterialBottomTabNavigator();
@@ -24,7 +25,7 @@ function MyTabs() {
     <Tab.Navigator
       activeColor="#fff"
       inactiveColor="#fff"
-      barStyle={{ backgroundColor: '#482B19'}}
+      barStyle={{ backgroundColor: 'rgba(22, 22, 22, 0.6)', elevation: 0, }}
     >
       <Tab.Screen name="Home" component={Dashboard}
         options={{
@@ -84,6 +85,15 @@ function App() {
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Dashboard" component={MyTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="DoIt" component={DoIt}
+          options={{
+            title: null,
+            headerRight: () => (
+              <MaterialCommunityIcons name="share-outline" size={30} color="black" style={{ paddingRight: 10 }} />
+            ),
+          }}
+
+        />
       </Stack.Navigator>
     </NavigationContainer>
 
