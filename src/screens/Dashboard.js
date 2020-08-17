@@ -32,7 +32,7 @@ const videoData = [
     },
     {
         id: '2',
-        videoURL: require('../../assests/c.mp4'),
+        videoURL: require('../../assests/d.mp4'),
         imageURL: 'https://pbs.twimg.com/profile_images/1055263632861343745/vIqzOHXj.jpg',
         link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
         userId: '@nareereddyK',
@@ -44,20 +44,7 @@ const videoData = [
         shares: '50',
         mute: false
     },
-    {
-        id: '3',
-        videoURL: require('../../assests/d.mp4'),
-        imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQru3J5pHhqHu9_CC0kG-UcKHfyIrv5VTTyZA&usqp=CAU',
-        link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        userId: '@sundarGolla@123',
-        movieName: 'Ismart Shankar',
-        songTitle: 'Dimmak',
-        songDescription: 'Dimmak karab',
-        likes: '250',
-        comments: '10',
-        shares: '150',
-        mute: false
-    },
+   
 ]
 function Dashboard({ navigation }) {
     const [paused, setPaused] = useState(false);

@@ -15,6 +15,7 @@ import Search from './src/screens/Search'
 import Create from './src/screens/Create';
 import Notification from './src/screens/Notification'
 import TestHome from './src/screens/TestHome';
+import VideoRecord from './src/screens/Test';
 import DoIt from './src/screens/DoIt';
 
 const Stack = createStackNavigator()
@@ -94,6 +95,7 @@ function App() {
           }}
 
         />
+        <Stack.Screen name="VideoRecord" component={VideoRecord} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
 
