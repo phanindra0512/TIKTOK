@@ -5921,6 +5921,11 @@ react-native-swiper@^1.6.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-text-ticker@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-text-ticker/-/react-native-text-ticker-1.6.0.tgz#51a14957197d4d23e98a5d90d0c0d50ed2e87b17"
+  integrity sha512-rVlSnYe+Xn3GXJ3OvKpg4I7qBaGm53Kd0VJPZTUT37YHqaqkRjI0/YrvzA5mDwNzTRiT6WvPXt6DUxbhg8dmgg==
+
 react-native-track-player@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-1.2.3.tgz#cd147b1fc93a229c49392abd7b37f087285e673a"
