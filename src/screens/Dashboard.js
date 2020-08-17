@@ -44,18 +44,19 @@ const videoData = [
         shares: '50',
         mute: false
     },
-   
+
 ]
 function Dashboard({ navigation }) {
-    const [paused, setPaused] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
     const [isMute, setIsMute] = useState(true);
     const [isValue, setIsValue] = useState('')
+    const [currentIndex, setCurrentIndex] = useState('0')
 
-    const onScrollEnd = (e, state) => {
-        console.log('Index is:', state.index);
-    };
+
     const onIndexChanged = (index) => {
         console.log('Swiper Index: ', index);
+        setCurrentIndex(index)
+        setIsPaused(false)
     }
 
 
@@ -78,13 +79,16 @@ function Dashboard({ navigation }) {
         }
     };
 
-
+    console.disableYellowBox = true;
     return (
         <View style={styles.wrapper}>
             <Swiper horizontal={false}
                 showsPagination={false}
                 // onMomentumScrollEnd={onScrollEnd}
                 onIndexChanged={onIndexChanged.bind(this)}
+                index={0}
+                loop={false}
+
             >
 
                 {
@@ -92,7 +96,7 @@ function Dashboard({ navigation }) {
                         return (
 
                             <View style={styles.slide1} key={index}>
-                                <TouchableOpacity onPress={() => setPaused(!paused)}>
+                                <TouchableOpacity onPress={() => setIsPaused(!isPaused)}>
                                     <Video source={Item.videoURL}
                                         // onTouchStart={() => setPaused(!paused)}
                                         // onFullscreenPlayerWillPresent={self.fullScreenPlayerWillPresent}
@@ -112,8 +116,10 @@ function Dashboard({ navigation }) {
                                         repeat
                                         resizeMode="cover"
                                         fullscreen={true}
-                                        muted={Item.mute}
-                                        paused={paused}
+                                        currentIndex={currentIndex}
+                                        muted={currentIndex == index ? false : true}
+                                        paused={isPaused}
+                                        // paused={index !== currentIndex || isPaused ? false : true}
                                         style={{
                                             width: Dimensions.get('window').width,
                                             height: Dimensions.get('window').height,
@@ -141,7 +147,7 @@ function Dashboard({ navigation }) {
                                     <Text style={{ color: 'white' }}>{Item.comments}</Text>
                                     <FontAwesome name="share" color="white" size={35} style={{ paddingTop: 20 }} onPress={() => onShare(Item.link)} />
                                     <Text style={{ color: 'white' }}>{Item.shares}</Text>
-                                    <TouchableOpacity onPress={() => { setPaused(true); navigation.navigate('DoIt', { img: Item.imageURL, desc: Item.songDescription, title: Item.songTitle, likes: Item.likes }) }}>
+                                    <TouchableOpacity onPress={() => { setIsPaused(true); navigation.navigate('DoIt', { img: Item.imageURL, desc: Item.songDescription, title: Item.songTitle, likes: Item.likes }) }}>
                                         <Image source={require('../../assests/player.png')} style={{ width: 50, height: 50, marginTop: 20 }} />
                                     </TouchableOpacity>
 
