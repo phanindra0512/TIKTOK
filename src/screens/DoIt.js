@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, StatusBar, Image, ScrollView } from 'react-native'
+import { View, Text, StatusBar, Image, ScrollView ,TouchableOpacity} from 'react-native'
 import { BaseRouter } from '@react-navigation/native'
 import { Title } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-function DoIt({ route }) {
+function DoIt({ route,navigation }) {
     return (
         <View style={{ flex: 1, }}>
             <StatusBar translucent barStyle="dark-content" backgroundColor="transparent" />
@@ -38,7 +38,9 @@ function DoIt({ route }) {
                 </ScrollView>
             </View>
             <View style={{ alignSelf: 'center', position: 'absolute', bottom: 20, backgroundColor: 'red', borderRadius: 50, elevation: 10 }}>
+                <TouchableOpacity onPress={()=> navigation.navigate('VideoRecord')}>
                 <Ionicons name="ios-videocam" color="#fff" size={35} style={{ padding: 10 }} />
+                </TouchableOpacity>
             </View>
         </View>
     )

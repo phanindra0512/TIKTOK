@@ -1,165 +1,259 @@
-import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  Dimensions,
-  StyleSheet,
-  Image,
-  ImageBackground,
-} from 'react-native';
-import Video from 'react-native-video';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
-const {width, height} = Dimensions.get('window');
 
-class VideoData extends Component {
-  constructor(props) {
-    super(props);
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity,  ToastAndroid } from 'react-native';
+import { RNCamera } from 'react-native-camera';
+import CameraRoll from "@react-native-community/cameraroll";
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import IoniconsIcon from 'react-native-vector-icons/Ionicons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import TrackPlayer from 'react-native-track-player';
+
+const PendingView = () => (
+    <View
+        style={{
+            flex: 1,
+            backgroundColor: 'lightgreen',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }}
+    >
+      <Text>Waiting</Text>
+    </View>
+);
+
+export default class VideoRecord extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            videoData: null,
+            recording: false,
+            data: null,
+            flashMode: false,
+            backCamera: true,
+            seconds: 0,
+            maxDuration: 30, // seconds
+            captureAudio: true,
+        };
+    }
+
+    takePicture = async function(camera) {
+      const options = { quality: 0.5, base64: true };
+      const data = await camera.takePictureAsync(options);
+      //  eslint-disable-next-line
+      console.log(data.uri);
+    };
+    recordVideo = async () => {
+        if (this.camera) {
+            if (!this.state.recording)
+            
+                this.startRecording();
+            else this.stopRecording();
+        }
+    }
+
+  
+    
+audioPlay=async()=>{
+  try{
+    TrackPlayer.setupPlayer().then(async () => {
+ 
+      // Adds a track to the queue
+      await TrackPlayer.add({
+          id: 'trackId',
+          url: require('../../assests/songA.mp3'),
+          title: 'Track Title',
+          artist: 'Track Artist',
+          artwork: require('../../assests/player.png')
+      });
+   
+  
+      // Starts playing it
+      TrackPlayer.play();
+      TrackPlayer.updateOptions({
+        stopWithApp: false
+    });
+   
+  });
+}catch(error){
+  console.log(error);
+}
+}
+    getVideos = () => {
+      CameraRoll.getPhotos({
+          first: 20,
+          groupTypes: 'Album',
+          groupName: 'myCameraApp Photos',
+          assetType: 'Photos'
+      })
+      .then(r => console.log(r))
   }
 
-  render() {
-    return (
-      <View>
-        <Video source={this.props.item.video} repeat style={styles.video} />
-        <View style={styles.mainContainer}>
-          <View style={styles.innerLeft}>
-            <View style={styles.dataContainer}>
-              <Text style={styles.title}>@{this.props.item.title}</Text>
-              <Text style={styles.description} numberOfLines={4}>
-                {this.props.item.description}
-              </Text>
-              <Text
-                style={{color: '#fff', fontWeight: 'bold', marginBottom: 15}}>
-                #AppDevBlog #ReactNative
-              </Text>
-              <View style={styles.music}>
-                <Icon
-                  name="md-musical-note"
-                  size={18}
-                  color="#fff"
-                  style={{marginRight: 10}}
-                />
-                <Text style={{color: '#fff'}}>AppDevBlog - React Native</Text>
-              </View>
+    startRecording = async () => {
+      this.audioPlay();
+        this.setState({ recording: true });
+        this.countRecordTime = setInterval(() => this.setState({ seconds: this.state.seconds + 1 }), 1000);
+        const cameraConfig = { maxDuration: this.state.maxDuration };
+        const data = await this.camera.recordAsync(cameraConfig);
+        this.setState({ recording: false });
+        CameraRoll.save(data.uri, 'video').then(onfulfilled => {
+            ToastAndroid.show(`New video path: ${onfulfilled}`, ToastAndroid.SHORT)
+            console.log('naree',data.uri);
+        }).catch(error => ToastAndroid.show(`${error.message}`, ToastAndroid.SHORT));
+    }
+
+    stopRecording = () => {
+        this.camera.stopRecording();
+        clearInterval(this.countRecordTime);
+        this.setState({ seconds: 0 });
+    }
+
+    reverseCamera = () => {
+        if (this.state.recording) {
+            clearInterval(this.countRecordTime);
+            this.setState({ seconds: 0 });
+        }
+
+        let backCamera = !this.state.backCamera;
+        if (backCamera)
+            ToastAndroid.show('Reverse to back camera', ToastAndroid.SHORT);
+        else ToastAndroid.show('Reverse to front camera', ToastAndroid.SHORT);
+        this.setState({ backCamera });
+    }
+
+    controlFlashMode = () => {
+        this.setState({ flashMode: !this.state.flashMode });
+    }
+
+    secondsToMMSS = (seconds) => {
+        let m = Math.floor(seconds / 60);
+        let s = Math.floor(seconds % 60);
+    
+        let mDisplay = m < 10 ? `0${m}` : `${m}`;
+        let sDisplay = s < 10 ? `0${s}` : `${s}`;
+        return `${mDisplay}:${sDisplay}`; 
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <RNCamera
+                    ref={camera => this.camera = camera}
+                    style={styles.preview}
+                    type={ RNCamera.Constants.Type.front}
+                    flashMode={this.state.flashMode ? RNCamera.Constants.FlashMode.on: RNCamera.Constants.FlashMode.off}
+                    androidCameraPermissionOptions={{
+                      title: 'Permission to use camera',
+                      message: 'We need your permission to use your camera',
+                      buttonPositive: 'Ok',
+                      buttonNegative: 'Cancel',
+                    }}
+                    androidRecordAudioPermissionOptions={{
+                      title: 'Permission to use audio recording',
+                      message: 'We need your permission to use your audio',
+                      buttonPositive: 'Ok',
+                      buttonNegative: 'Cancel',
+                    }}
+                    captureAudio={this.state.captureAudio}
+                >
+                    {({ camera, status, recordAudioPermissionStatus }) => {
+                        if (status !== 'READY') return <PendingView />;
+                            return (
+                                <View style={styles.actions}>
+                                    {/* <TouchableOpacity
+                                        style={styles.iconContainer}
+                                        onPress={this.controlFlashMode}>
+                                        <IoniconsIcon
+                                            style={styles.icon}
+                                            size={50}
+                                            color='black'
+                                            name={ this.state.flashMode ? 'ios-flash' : 'ios-flash-off' }
+                                        />
+                                    </TouchableOpacity> */}
+                                    {/* <TouchableOpacity
+                                        style={styles.iconContainer}
+                                        onPress={this.reverseCamera}>
+                                        <IoniconsIcon
+                                            style={styles.icon}
+                                            size={60}
+                                            color='black'
+                                            name='ios-camera-reverse'
+                                        />
+                                    </TouchableOpacity> */}
+                                    {/* <TouchableOpacity
+                                        style={styles.iconContainer}
+                                        onPress={this.takePicture}>
+                                        <EntypoIcon
+                                            style={styles.icon}
+                                            size={40}
+                                            color='black'
+                                            name='camera'
+                                        />
+                                    </TouchableOpacity> */}
+                                    <TouchableOpacity
+                                        style={styles.iconContainer}
+                                        onPress={this.recordVideo}>
+                                        <EntypoIcon
+                                            style={styles.icon}
+                                            size={40}
+                                            color={this.state.recording ? 'red' : 'white'}
+                                            name='video-camera'
+                                        />
+                                        {
+                                            this.state.recording ?
+                                            (<Text>{this.secondsToMMSS(this.state.seconds)}</Text>) :
+                                            (null)
+                                        }
+                                    </TouchableOpacity>
+                                   
+                                </View>
+                            );
+                    }}
+                </RNCamera>
             </View>
-          </View>
-
-          <View style={styles.innerRight}>
-            <ImageBackground
-              source={this.props.item.img}
-              style={styles.profile}
-              borderRadius={25}
-              borderWidth={1}
-              borderColor="#fff">
-              <TouchableOpacity style={styles.btn}>
-                <Icon name="ios-add" color="#fff" size={15} />
-              </TouchableOpacity>
-            </ImageBackground>
-
-            <Icon name="ios-heart" size={45} color="#e5e5e5" />
-            <Text style={{color: '#fff', marginBottom: 25}}>1234</Text>
-
-            <Icon2 name="comment" size={45} color="#e5e5e5" />
-            <Text style={{color: '#fff', marginBottom: 25}}>1234</Text>
-
-            <Icon
-              name="logo-whatsapp"
-              size={45}
-              color="#4fce5d"
-              style={{marginBottom: 35}}
-            />
-
-            <ImageBackground
-              source={require('../../assests/logo.jpg')}
-              style={styles.profile}
-              borderRadius={25}
-              borderWidth={1}
-              borderColor="#fff"
-            />
-          </View>
-        </View>
-      </View>
-    );
-  }
+        );
+    }
 }
 
-
 const styles = StyleSheet.create({
-    video: {
-      height: height,
-      width: width,
-      backgroundColor: 'black',
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'black',
     },
-    header: {
-      width: width,
-      height: 50,
-      justifyContent: 'center',
-      alignContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
-      top: 0,
-      flexDirection: 'row',
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
-    text: {
-      color: '#fff',
-      fontSize: 17,
-      marginRight: 15,
+    capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 15,
+        paddingHorizontal: 20,
+        alignSelf: 'center',
+        margin: 20,
     },
-    mainContainer: {
-      height: '55%',
-      flexDirection: 'row',
-      width: width,
-      position: 'absolute',
-      bottom: 0,
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    innerLeft: {
-      width: '80%',
-      height: '100%',
+    icon: {
+        marginHorizontal: 16,
+       
+        
+marginTop:10,
+marginBottom:20
+        // paddingVertical: 10,
     },
-    innerRight: {
-      width: '20%',
-      height: '100%',
-      alignItems: 'center',
+    actions: {
+        flex: 0,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        
+        width: '100%',
+        
     },
-    profile: {
-      height: 50,
-      width: 50,
-      alignItems: 'center',
-      marginBottom: 25,
-    },
-    btn: {
-      backgroundColor: '#ff5b77',
-      width: 20,
-      height: 20,
-      borderRadius: 10,
-      elevation: 5,
-      justifyContent: 'center',
-      alignContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
-      bottom: -10,
-    },
-    dataContainer: {
-      height: '45%',
-      width: '100%',
-      position: 'absolute',
-      bottom: 0,
-      padding: 5,
-    },
-    title: {
-      fontWeight: 'bold',
-      color: '#fff',
-    },
-    description: {
-      color: '#e5e5e5',
-    },
-    music: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-  });
-  
-
-export default VideoData;
+});
