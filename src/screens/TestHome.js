@@ -1,49 +1,39 @@
-import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  Dimensions,
-  StyleSheet,
-  Image,
-  ImageBackground,
-} from 'react-native';
+import React,{ useState, useRef, useEffect } from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import Video from 'react-native-video';
+
+function TestHome({route, navigation}) {
+  return (
+    <View style={styles.container}>
+       <Video
+        source={{uri: route.params.linkVideo}}
+        
+        useNativeControls={true}
+        shouldPlay={true}
+         resizeMode="contain"
+        style={{
+          width: 300,
+          height: 400,
+          backgroundColor: 'black',
+        }}
+      /> 
+    </View>
+  );
+}
 
 
-class TestHome extends Component {
-   
-  render(){
-      return (
-        <View style={{height: '100%'}}>
-          <Text>nk</Text>
-          
-        </View>
-      );
-    }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  video: {
+    position: 'absolute',
+    top: 0, left: 0, right: 0, bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
   }
-
-  const styles = StyleSheet.create({
-    
-    header: {
-      width: "100%",
-      height: 50,
-      justifyContent: 'center',
-      alignContent: 'center',
-      alignItems: 'center',
-      position: 'absolute',
-      top: 0,
-      flexDirection: 'row',
-    },
-    text: {
-      color: '#fff',
-      fontSize: 17,
-      marginRight: 15,
-    },
-    
-  });
-  
-  export default TestHome;
-
-  
-  
+});
+export default TestHome;

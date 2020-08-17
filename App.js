@@ -96,6 +96,7 @@ function App() {
 
         />
         <Stack.Screen name="VideoRecord" component={VideoRecord} options={{ headerShown: false }} />
+        <Stack.Screen name="TestHome" component={TestHome} />
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -33,7 +33,7 @@ export default class VideoRecord extends Component {
             flashMode: false,
             backCamera: true,
             seconds: 0,
-            maxDuration: 30, // seconds
+            maxDuration: 23, // seconds
             captureAudio: true,
         };
     }
@@ -44,6 +44,7 @@ export default class VideoRecord extends Component {
       //  eslint-disable-next-line
       console.log(data.uri);
     };
+
     recordVideo = async () => {
         if (this.camera) {
             if (!this.state.recording)
@@ -56,6 +57,7 @@ export default class VideoRecord extends Component {
   
     
 audioPlay=async()=>{
+  
   try{
     TrackPlayer.setupPlayer().then(async () => {
  
@@ -92,11 +94,11 @@ audioPlay=async()=>{
 
     startRecording = async () => {
       this.audioPlay();
-        this.setState({ recording: true });
+         this.setState({ recording: true });
         this.countRecordTime = setInterval(() => this.setState({ seconds: this.state.seconds + 1 }), 1000);
         const cameraConfig = { maxDuration: this.state.maxDuration };
         const data = await this.camera.recordAsync(cameraConfig);
-        this.setState({ recording: false });
+         this.setState({ recording: false });
         CameraRoll.save(data.uri, 'video').then(onfulfilled => {
             ToastAndroid.show(`New video path: ${onfulfilled}`, ToastAndroid.SHORT)
             console.log('naree',data.uri);
@@ -104,9 +106,12 @@ audioPlay=async()=>{
     }
 
     stopRecording = () => {
+      setTimeout(()=>{
         this.camera.stopRecording();
         clearInterval(this.countRecordTime);
         this.setState({ seconds: 0 });
+      },5000)
+      
     }
 
     reverseCamera = () => {
@@ -148,13 +153,16 @@ audioPlay=async()=>{
                       message: 'We need your permission to use your camera',
                       buttonPositive: 'Ok',
                       buttonNegative: 'Cancel',
+                      
                     }}
+                    maxDuration={30}
                     androidRecordAudioPermissionOptions={{
                       title: 'Permission to use audio recording',
                       message: 'We need your permission to use your audio',
                       buttonPositive: 'Ok',
                       buttonNegative: 'Cancel',
                     }}
+
                     captureAudio={this.state.captureAudio}
                 >
                     {({ camera, status, recordAudioPermissionStatus }) => {
@@ -193,11 +201,13 @@ audioPlay=async()=>{
                                     </TouchableOpacity> */}
                                     <TouchableOpacity
                                         style={styles.iconContainer}
-                                        onPress={this.recordVideo}>
+                                         onPress={this.recordVideo}
+                                        //onPress={()=>{this.recordVideo();this.stopRecording()}}
+                                        >
                                         <EntypoIcon
                                             style={styles.icon}
                                             size={40}
-                                            color={this.state.recording ? 'red' : 'white'}
+                                            color='red'
                                             name='video-camera'
                                         />
                                         {
