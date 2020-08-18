@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Icons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components/native'
 
 import Login from './src/screens/Login';
@@ -50,7 +51,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Add',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="sticker-plus" color={color} size={26} />
+            <Icons name="md-duplicate-sharp" color={color} size={26} />
           ),
         }}
       />

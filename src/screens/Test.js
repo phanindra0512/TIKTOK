@@ -168,8 +168,8 @@ audioPlay=async()=>{
 
         let backCamera = !this.state.backCamera;
         if (backCamera)
-            ToastAndroid.show('Reverse to back camera', ToastAndroid.SHORT);
-        else ToastAndroid.show('Reverse to front camera', ToastAndroid.SHORT);
+            ToastAndroid.show('Reverse to front camera', ToastAndroid.SHORT);
+        else ToastAndroid.show('Reverse to back camera', ToastAndroid.SHORT);
         this.setState({ backCamera });
     }
 
@@ -192,7 +192,7 @@ audioPlay=async()=>{
                 <RNCamera
                     ref={camera => this.camera = camera}
                     style={styles.preview}
-                    type={this.state.backCamera ? RNCamera.Constants.Type.back : RNCamera.Constants.Type.front}
+                    type={this.state.backCamera ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
                     flashMode={RNCamera.Constants.FlashMode.on}
                     androidCameraPermissionOptions={{
                       title: 'Permission to use camera',
@@ -222,16 +222,7 @@ audioPlay=async()=>{
                                             name={ this.state.flashMode ? 'ios-flash' : 'ios-flash-off' }
                                         />
                                     </TouchableOpacity> */}
-                                       <TouchableOpacity
-                                        style={styles.iconContainer}
-                                        onPress={this.reverseCamera}>
-                                        <IoniconsIcon
-                                            style={styles.icon}
-                                            size={60}
-                                            color='white'
-                                            name='ios-camera-reverse'
-                                        /> 
-                                    </TouchableOpacity>  
+                                        
                                      {/* <TouchableOpacity
                                         style={styles.iconContainer}
                                         onPress={this.takePicture}>
@@ -245,16 +236,16 @@ audioPlay=async()=>{
                                     <TouchableOpacity
                                         style={styles.iconContainer}
                                         onPress={this.start}>
-                                        <EntypoIcon
-                                            style={styles.icon}
-                                            size={40}
+                                        <IoniconsIcon
+                                            style={{alignSelf:'center',alignItems:'center',justifyContent:'center',marginLeft:130}}
+                                            size={65}
                                             color='red'
                                             color={this.state.recording ? 'red' : 'white'}
-                                            name='video-camera'
+                                            name='ios-radio-button-on'
                                         />
                                         {
                                             this.state.recording ?
-                                            (<Text>{this.secondsToMMSS(this.state.seconds)}</Text>) :
+                                            (<Text style={{color:'white',alignSelf:'center',alignItems:'center',justifyContent:'center',marginLeft:130}}>{this.secondsToMMSS(this.state.seconds)}</Text>) :
                                             (null)
                                         }
                                     </TouchableOpacity>
@@ -263,7 +254,16 @@ audioPlay=async()=>{
                                         title='PLAY'
                                         onPress={()=>this.props.navigation.navigate('TestHome',{linkVideo:this.state.source})}
                                       /> */}
-                                    
+                                    <TouchableOpacity
+                                        style={styles.iconContainer}
+                                        onPress={this.reverseCamera}>
+                                        <IoniconsIcon
+                                             style={{alignSelf:'flex-end',alignItems:'flex-end',justifyContent:'flex-end',marginLeft:60,marginBottom:10}}
+                                            size={60}
+                                            color='white'
+                                            name='ios-camera-reverse'
+                                        />
+                                    </TouchableOpacity> 
                                    
                                 </View>
                             );
@@ -311,8 +311,6 @@ marginBottom:20
     actions: {
         flex: 0,
         flexDirection: 'row',
-        alignItems:'center',
-        justifyContent:'center',
         width: '100%',
         
     },
