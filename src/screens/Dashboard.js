@@ -41,6 +41,35 @@ const videoData = [
         shares: '50',
         mute: false
     },
+   
+    {
+        id: '3',
+        videoURL: require('../../assests/h.mp4'),
+        imageURL: 'https://pbs.twimg.com/profile_images/1055263632861343745/vIqzOHXj.jpg',
+        link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        userId: '@nareereddyK',
+        movieName: 'Sarinodu',
+        songTitle: 'He is soo',
+        songDescription: 'He is Soo cute,he is soo sweet,he is soo handsome',
+        likes: '85',
+        comments: '10',
+        shares: '50',
+        mute: false
+    },
+    {
+        id: '4',
+        videoURL: require('../../assests/k.mp4'),
+        imageURL: 'https://pbs.twimg.com/profile_images/1055263632861343745/vIqzOHXj.jpg',
+        link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        userId: '@nareereddyK',
+        movieName: 'Sarinodu',
+        songTitle: 'He is soo',
+        songDescription: 'He is Soo cute,he is soo sweet,he is soo handsome',
+        likes: '85',
+        comments: '10',
+        shares: '50',
+        mute: false
+    },
 
 ]
 function Dashboard({ navigation }) {
@@ -167,7 +196,7 @@ function Dashboard({ navigation }) {
                                                     <FontAwesome name="share" color="white" size={35} style={{ paddingTop: 20 }} onPress={() => onShare(Item.link)} />
                                                     <Text style={{ color: 'white' }}>{Item.shares}</Text>
                                                     <TouchableOpacity onPress={() => { setIsPaused(true); navigation.navigate('DoIt', { img: Item.imageURL, desc: Item.songDescription, title: Item.songTitle, likes: Item.likes }) }}>
-                                                        <Animated.Image source={require('../../assests/player.png')} style={{ width: 50, height: 50, marginTop: 20, transform: [{ rotate: spin }] }} />
+                                                        <Animated.Image source={require('../../assests/player.png')} style={{ width: 60, height: 60, marginTop: 20, transform: [{ rotate: spin }] }} />
                                                     </TouchableOpacity>
 
                                                 </View>
