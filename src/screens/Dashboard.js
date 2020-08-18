@@ -25,7 +25,6 @@ const videoData = [
         likes: '100',
         comments: '20',
         shares: '150',
-        mute: false
     },
     {
         id: '2',
@@ -39,9 +38,47 @@ const videoData = [
         likes: '85',
         comments: '10',
         shares: '50',
-        mute: false
     },
-   
+    {
+        id: '3',
+        videoURL: require('../../assests/video3.mp4'),
+        imageURL: 'https://pbs.twimg.com/profile_images/1055263632861343745/vIqzOHXj.jpg',
+        link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        userId: '@nareereddyK',
+        movieName: 'Sarinodu',
+        songTitle: 'He is soo',
+        songDescription: 'He is Soo cute,he is soo sweet,he is soo handsome',
+        likes: '85',
+        comments: '10',
+        shares: '50',
+    },
+    {
+        id: '4',
+        videoURL: require('../../assests/video4.mp4'),
+        imageURL: 'https://pbs.twimg.com/profile_images/1055263632861343745/vIqzOHXj.jpg',
+        link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        userId: '@nareereddyK',
+        movieName: 'Sarinodu',
+        songTitle: 'He is soo',
+        songDescription: 'He is Soo cute,he is soo sweet,he is soo handsome',
+        likes: '85',
+        comments: '10',
+        shares: '50',
+    },
+    {
+        id: '5',
+        videoURL: require('../../assests/video5.mp4'),
+        imageURL: 'https://pbs.twimg.com/profile_images/1055263632861343745/vIqzOHXj.jpg',
+        link: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        userId: '@nareereddyK',
+        movieName: 'Sarinodu',
+        songTitle: 'He is soo',
+        songDescription: 'He is Soo cute,he is soo sweet,he is soo handsome',
+        likes: '85',
+        comments: '10',
+        shares: '50',
+    },
+
     {
         id: '3',
         videoURL: require('../../assests/h.mp4'),
@@ -127,132 +164,132 @@ function Dashboard({ navigation }) {
     })
     return (
         <View style={styles.wrapper}>
-            <Swiper horizontal={false}
-                showsPagination={false}
-                // onMomentumScrollEnd={onScrollEnd}
-                onIndexChanged={onIndexChanged.bind(this)}
-                index={0}
-                loop={false}
 
-            >
+            {
+                isValue == 1 ?
 
-                {
-                    videoData.map((Item, index) => {
-                        return (
+                    <Swiper horizontal={false}
+                        showsPagination={false}
+                        // onMomentumScrollEnd={onScrollEnd}
+                        onIndexChanged={onIndexChanged.bind(this)}
+                        index={0}
+                        loop={false}
+                    >
+                        {
+                            videoData.map((Item, index) => {
+                                return (
 
-                            <View style={styles.slide1} key={index}>
-                                {
-                                    isValue == 1 ?
-                                        (
-                                            <View>
-                                                <TouchableOpacity onPress={() => setIsPaused(!isPaused)}>
-                                                    <Video source={Item.videoURL}
-                                                        // onTouchStart={() => setPaused(!paused)}
-                                                        // onFullscreenPlayerWillPresent={self.fullScreenPlayerWillPresent}
-                                                        // onFullscreenPlayerDidPresent={self.fullScreenPlayerDidPresent}
-                                                        // onFullscreenPlayerWillDismiss={self.fullScreenPlayerWillDismiss}
-                                                        // onFullscreenPlayerDidDismiss={self.fullScreenPlayerDidDissmiss}
-                                                        // onLoadStart={self.loadStart}
-                                                        // onLoad={self.setDuration}
-                                                        // onProgress={self.setTime}
-                                                        // onTimedMetadata={self.onTimedMetadata}
-                                                        // rate={1.0}
-                                                        // volume={1.0}
-                                                        // shouldPlay
-                                                        // bounce={false}
-                                                        // isLooping
-                                                        // useNativeControls={false}
-                                                        repeat
-                                                        resizeMode="cover"
-                                                        fullscreen={true}
-                                                        currentIndex={currentIndex}
-                                                        muted={currentIndex == index ? false : true}
-                                                        paused={isPaused}
-                                                        // paused={index !== currentIndex || isPaused ? false : true}
-                                                        style={{
-                                                            width: Dimensions.get('window').width,
-                                                            height: Dimensions.get('window').height,
-                                                            backgroundColor: 'black',
-                                                        }}
-                                                    />
+                                    <View style={styles.slide1} key={index}>
+                                        <View>
+                                            <TouchableOpacity onPress={() => setIsPaused(!isPaused)}>
+                                                <Video source={Item.videoURL}
+                                                    // onTouchStart={() => setPaused(!paused)}
+                                                    // onFullscreenPlayerWillPresent={self.fullScreenPlayerWillPresent}
+                                                    // onFullscreenPlayerDidPresent={self.fullScreenPlayerDidPresent}
+                                                    // onFullscreenPlayerWillDismiss={self.fullScreenPlayerWillDismiss}
+                                                    // onFullscreenPlayerDidDismiss={self.fullScreenPlayerDidDissmiss}
+                                                    // onLoadStart={self.loadStart}
+                                                    // onLoad={self.setDuration}
+                                                    // onProgress={self.setTime}
+                                                    // onTimedMetadata={self.onTimedMetadata}
+                                                    // rate={1.0}
+                                                    // volume={1.0}
+                                                    // shouldPlay
+                                                    // bounce={false}
+                                                    // isLooping
+                                                    // useNativeControls={false}
+                                                    repeat
+                                                    resizeMode="cover"
+                                                    fullscreen={true}
+                                                    currentIndex={currentIndex}
+                                                    muted={currentIndex == index ? false : true}
+                                                    paused={isPaused}
+                                                    // paused={index !== currentIndex || isPaused ? false : true}
+                                                    style={{
+                                                        width: Dimensions.get('window').width,
+                                                        height: Dimensions.get('window').height,
+                                                        backgroundColor: 'black',
+                                                    }}
+                                                />
+                                            </TouchableOpacity>
+                                            <View style={{ position: 'absolute', bottom: 50, right: 0, marginRight: 10, alignItems: 'center', paddingVertical: 10 }}>
+                                                <Avatar.Image
+                                                    resizeMode="cover"
+                                                    source={{ uri: Item.imageURL }}
+                                                />
+                                                <Ionicons
+                                                    name="ios-add-circle-sharp"
+                                                    color="#FF444F"
+                                                    size={25}
+                                                    style={{ position: 'absolute', top: 62, }}
+
+                                                />
+                                                <Ionicons name="heart" color={isLike ? 'red' : 'white'} size={35} style={{ paddingTop: 20 }} onPress={() => setIsLike(!isLike)} />
+                                                <Text style={{ color: 'white' }}>{Item.likes}</Text>
+
+                                                <Ionicons name="chatbubble-ellipses" color="white" size={35} style={{ paddingTop: 20 }} />
+                                                <Text style={{ color: 'white' }}>{Item.comments}</Text>
+                                                <FontAwesome name="share" color="white" size={35} style={{ paddingTop: 20 }} onPress={() => onShare(Item.link)} />
+                                                <Text style={{ color: 'white' }}>{Item.shares}</Text>
+                                                <TouchableOpacity onPress={() => { setIsPaused(true); navigation.navigate('DoIt', { img: Item.imageURL, desc: Item.songDescription, title: Item.songTitle, likes: Item.likes }) }}>
+                                                    <Animated.Image source={require('../../assests/player.png')} style={{ width: 50, height: 50, marginTop: 20, transform: [{ rotate: spin }] }} />
                                                 </TouchableOpacity>
-                                                <View style={{ position: 'absolute', bottom: 30, right: 0, marginRight: 10, alignItems: 'center', paddingVertical: 10 }}>
-                                                    <Avatar.Image
-                                                        resizeMode="cover"
-                                                        source={{ uri: Item.imageURL }}
-                                                    />
-                                                    <Ionicons
-                                                        name="ios-add-circle-sharp"
-                                                        color="#FF444F"
-                                                        size={25}
-                                                        style={{ position: 'absolute', top: 62, }}
+                                                <Text style={{ color: 'red', fontWeight: 'bold' }}>Record</Text>
 
-                                                    />
-                                                    <Ionicons name="heart" color={isLike ? 'red' : 'white'} size={35} style={{ paddingTop: 20 }} onPress={() => setIsLike(!isLike)} />
-                                                    <Text style={{ color: 'white' }}>{Item.likes}</Text>
+                                            </View>
 
-                                                    <Ionicons name="chatbubble-ellipses" color="white" size={35} style={{ paddingTop: 20 }} />
-                                                    <Text style={{ color: 'white' }}>{Item.comments}</Text>
-                                                    <FontAwesome name="share" color="white" size={35} style={{ paddingTop: 20 }} onPress={() => onShare(Item.link)} />
-                                                    <Text style={{ color: 'white' }}>{Item.shares}</Text>
-                                                    <TouchableOpacity onPress={() => { setIsPaused(true); navigation.navigate('DoIt', { img: Item.imageURL, desc: Item.songDescription, title: Item.songTitle, likes: Item.likes }) }}>
-                                                        <Animated.Image source={require('../../assests/player.png')} style={{ width: 60, height: 60, marginTop: 20, transform: [{ rotate: spin }] }} />
-                                                    </TouchableOpacity>
-
+                                            <View style={{ position: 'absolute', bottom: 60, left: 0, }}>
+                                                <Text style={{ color: 'white', marginLeft: 30, fontSize: 17, paddingBottom: 10 }}>{Item.userId}</Text>
+                                                <Text style={{ color: 'white', marginLeft: 30, fontSize: 17, paddingBottom: 10 }}>#{Item.movieName} #{Item.songTitle}</Text>
+                                                <View style={{ flexDirection: 'row', marginLeft: 30, }}>
+                                                    <Ionicons name="musical-notes" color="white" size={20} style={{ paddingTop: 3 }} />
+                                                    <TextTicker
+                                                        style={{ fontSize: 17, color: '#fff', width: 150, paddingLeft: 10 }}
+                                                        duration={3000}
+                                                        loop
+                                                        bounce
+                                                        repeatSpacer={50}
+                                                        marqueeDelay={2000}
+                                                    >
+                                                        {Item.songDescription}
+                                                    </TextTicker>
                                                 </View>
 
-                                                <View style={{ position: 'absolute', bottom: 30, left: 0, }}>
-                                                    <Text style={{ color: 'white', marginLeft: 30, fontSize: 17, paddingBottom: 10 }}>{Item.userId}</Text>
-                                                    <Text style={{ color: 'white', marginLeft: 30, fontSize: 17, paddingBottom: 10 }}>#{Item.movieName} #{Item.songTitle}</Text>
-                                                    <View style={{ flexDirection: 'row', marginLeft: 30, }}>
-                                                        <Ionicons name="musical-notes" color="white" size={20} style={{ paddingTop: 3 }} />
-                                                        <TextTicker
-                                                            style={{ fontSize: 17, color: '#fff', width: 150, paddingLeft: 10 }}
-                                                            duration={3000}
-                                                            loop
-                                                            bounce
-                                                            repeatSpacer={50}
-                                                            marqueeDelay={2000}
-                                                        >
-                                                            {Item.songDescription}
-                                                        </TextTicker>
-                                                    </View>
-
-                                                </View>
                                             </View>
-                                        ) :
-                                        (
-                                            <View style={{ flex: 1, backgroundColor: '#999', alignItems: 'center', justifyContent: 'center' }}>
-                                                <Button
-                                                    uppercase={false}
-                                                    contentStyle={{ backgroundColor: '#ccc' }}
-                                                    labelStyle={{ color: '#000', fontWeight: 'bold', fontSize: 17 }}
-                                                >Please Login</Button>
-                                            </View>
-                                        )
-                                }
+                                        </View>
 
-                                <View style={{ position: 'absolute', top: 50, flexDirection: 'row', alignSelf: 'center' }}>
-                                    <TouchableOpacity onPress={() => setIsValue(0)}>
-                                        <Text style={{ fontSize: 20, fontWeight: `${(isValue == 1) ? '200' : 'bold'}`, color: '#fff' }}>Following</Text>
-                                    </TouchableOpacity>
-                                    <Text style={{ fontSize: 20, color: '#fff', paddingHorizontal: 15 }}>|</Text>
-                                    <TouchableOpacity onPress={() => setIsValue(1)}>
-                                        <Text style={{ fontSize: 20, fontWeight: `${(isValue == 1) ? 'bold' : '200'}`, color: '#fff' }}>For You</Text>
-                                    </TouchableOpacity>
-                                </View>
-
-
-
-
-                            </View>
-
-
-
-                        )
-                    })
-                }
-            </Swiper>
+                                        <View style={{ position: 'absolute', top: 50, flexDirection: 'row', alignSelf: 'center' }}>
+                                            <TouchableOpacity onPress={() => setIsValue(0)}>
+                                                <Text style={{ fontSize: 20, fontWeight: `${(isValue == 1) ? '200' : 'bold'}`, color: '#fff' }}>Following</Text>
+                                            </TouchableOpacity>
+                                            <Text style={{ fontSize: 20, color: '#fff', paddingHorizontal: 15 }}>|</Text>
+                                            <TouchableOpacity onPress={() => setIsValue(1)}>
+                                                <Text style={{ fontSize: 20, fontWeight: `${(isValue == 1) ? 'bold' : '200'}`, color: '#fff' }}>For You</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                )
+                            })
+                        }
+                    </Swiper>
+                    :
+                    <View style={{ flex: 1, backgroundColor: '#999', alignItems: 'center', justifyContent: 'center' }}>
+                        <View style={{ position: 'absolute', top: 50, flexDirection: 'row', alignSelf: 'center' }}>
+                            <TouchableOpacity onPress={() => setIsValue(0)}>
+                                <Text style={{ fontSize: 20, fontWeight: `${(isValue == 1) ? '200' : 'bold'}`, color: '#fff' }}>Following</Text>
+                            </TouchableOpacity>
+                            <Text style={{ fontSize: 20, color: '#fff', paddingHorizontal: 15 }}>|</Text>
+                            <TouchableOpacity onPress={() => setIsValue(1)}>
+                                <Text style={{ fontSize: 20, fontWeight: `${(isValue == 1) ? 'bold' : '200'}`, color: '#fff' }}>For You</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <Button
+                            uppercase={false}
+                            contentStyle={{ backgroundColor: '#ccc' }}
+                            labelStyle={{ color: '#000', fontWeight: 'bold', fontSize: 17 }}
+                        >Please Login</Button>
+                    </View>
+            }
         </View>
     )
 }
