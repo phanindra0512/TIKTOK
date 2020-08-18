@@ -1,14 +1,11 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,  ToastAndroid ,Button} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,  ToastAndroid,Button } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import CameraRoll from "@react-native-community/cameraroll";
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import TrackPlayer from 'react-native-track-player';
+import CameraRoll from "@react-native-community/cameraroll";
 
-//const myVar = setTimeout(function(){ alert("Hello") }, 3000);
 const PendingView = () => (
     <View
         style={{
@@ -34,143 +31,73 @@ export default class Create extends Component {
             flashMode: false,
             backCamera: true,
             seconds: 0,
-            maxDuration: 23, // seconds
+            maxDuration: 300, // seconds
             captureAudio: true,
-            source:'',
-            timer:0
+            source:''
         };
     }
 
-    
-
-
-
-
-    // takePicture = async function(camera) {
-    //   const options = { quality: 0.5, base64: true };
-    //   const data = await camera.takePictureAsync(options);
-    //   //  eslint-disable-next-line
-    //   console.log(data.uri);
-    // };
-    // recordVideo = async () => {
-    //     if (this.camera) {
-    //         if (!this.state.recording)
-            
-    //             this.startRecording();
-    //         else this.stopRecording();
-    //     }
-    // }
-
-  
-    
-
-    
-
-    // startRecording = async () => {
-      
-    //     this.setState({ recording: true });
-    //     this.countRecordTime = setInterval(() => this.setState({ seconds: this.state.seconds + 1 }), 1000);
-    //     const cameraConfig = { maxDuration: this.state.maxDuration };
-    //     const data = await this.camera.recordAsync(cameraConfig);
-        
-    //     this.setState({ recording: false });
-    //     this.setState({source:data.uri});
-    //     console.log('reddy',this.state.source);
-    //     CameraRoll.save(data.uri, 'video').then(onfulfilled => {
-    //         ToastAndroid.show(`New video path: ${onfulfilled}`, ToastAndroid.SHORT)
-    //         console.log('naree',data.uri);
-    //     }).catch(error => ToastAndroid.show(`${error.message}`, ToastAndroid.SHORT));
-      
-    // }
-     
-    start = async () => {
-
-      this.setState({ recording: true });
-        this.interval = 
-          setInterval(() => this.setState({ seconds: this.state.seconds + 1 }), 1000)
-      
-      if (this.camera) {
-        const options = {  quality: RNCamera.Constants.VideoQuality["480p"],
-        maxDuration:10,
-       };
-        const data = await this.camera.recordAsync(options);
-        this.setState({ recording: false });
-        console.log('nk',data.uri);
-        this.stopNk();
-        this.setState({source:data.uri});
-        CameraRoll.save(data.uri, 'video').then(onfulfilled => {
-                   ToastAndroid.show(`New video path: ${onfulfilled}`, ToastAndroid.SHORT)
-                   console.log('naree',data.uri);
-               }).catch(error => ToastAndroid.show(`${error.message}`, ToastAndroid.SHORT));
-      }
+    takePicture = async () => {
+        if (this.camera) {
+            const options = { quality: 1 };
+            const data = await this.camera.takePictureAsync(options);
+            CameraRoll.saveToCameraRoll(data.uri, 'photo').then(onfulfilled => {
+                ToastAndroid.show(onfulfilled, ToastAndroid.SHORT);
+            }).catch(error => {
+                ToastAndroid.show(`${error.message}`, ToastAndroid.SHORT);
+            });
+        }
     };
-      
-    stopMusic(){
-      TrackPlayer.stop();
+
+    recordVideo = async () => {
+        if (this.camera) {
+            if (!this.state.recording)
+                this.startRecording();
+            else this.stopRecording();
+        }
     }
-    
-audioPlay=async()=>{
-  
-  try{
-    TrackPlayer.setupPlayer().then(async () => {
- 
-      // Adds a track to the queue
-      await TrackPlayer.add({
-          id: 'trackId',
-          url: require('../../assests/songA.mp3'),
-          title: 'Track Title',
-          artist: 'Track Artist',
-          artwork: require('../../assests/player.png')
-      });
-   
-  
-      // Starts playing it
-      TrackPlayer.play();
-      TrackPlayer.updateOptions({
-        stopWithApp: false
-    });
-   
-  });
-}catch(error){
-  console.log(error);
-}
-}
-   stopNk =async()=>{
-    
-      this.setState({seconds:0})
-      this.camera.stopRecording();
-      
-      clearInterval(this.interval);
-  
-    
-   }
-    
 
-    // stopRecording = () => {
-      
-    //   this.camera.stopRecording();
-    //     clearInterval(this.countRecordTime);
-    //     this.setState({ seconds: 0 });
-      
-      
-    // }
+    startRecording = async () => {
+        this.setState({ recording: true });
+        this.countRecordTime = setInterval(() => this.setState({ seconds: this.state.seconds + 1 }), 1000);
+        const cameraConfig = { maxDuration: this.state.maxDuration };
+        const data = await this.camera.recordAsync(cameraConfig);
+        this.setState({ recording: false });
+        this.setState({source:data.uri});
+    if(this.state.source!=''){
+        this.props.navigation.navigate('TestHome',{linkVideo:this.state.source}) 
+    }else{
+        return
+    }
+        console.log('reddy',this.state.source);
+        CameraRoll.save(data.uri, 'video').then(onfulfilled => {
+            ToastAndroid.show(`New video path: ${onfulfilled}`, ToastAndroid.SHORT)
+            console.log('naree',data.uri)
+        }).catch(error => ToastAndroid.show(`${error.message}`, ToastAndroid.SHORT));
+    }
 
-    // reverseCamera = () => {
-    //     if (this.state.recording) {
-    //         clearInterval(this.countRecordTime);
-    //         this.setState({ seconds: 0 });
-    //     }
+    stopRecording = () => {
+        this.camera.stopRecording();
+        clearInterval(this.countRecordTime);
+        this.setState({ seconds: 0 });
+    }
 
-    //     let backCamera = !this.state.backCamera;
-    //     if (backCamera)
-    //         ToastAndroid.show('Reverse to back camera', ToastAndroid.SHORT);
-    //     else ToastAndroid.show('Reverse to front camera', ToastAndroid.SHORT);
-    //     this.setState({ backCamera });
-    // }
+    reverseCamera = () => {
+        if (this.state.recording) {
+            clearInterval(this.countRecordTime);
+            this.setState({ seconds: 0 });
+        }
 
-    // controlFlashMode = () => {
-    //     this.setState({ flashMode: !this.state.flashMode });
-    // }
+        let backCamera = !this.state.backCamera;
+        if (backCamera)
+            ToastAndroid.show('Reverse to back camera', ToastAndroid.SHORT);
+        else ToastAndroid.show('Reverse to front camera', ToastAndroid.SHORT);
+        this.setState({ backCamera });
+    }
+
+    controlFlashMode = () => {
+        this.setState({ flashMode: !this.state.flashMode });
+    }
 
     secondsToMMSS = (seconds) => {
         let m = Math.floor(seconds / 60);
@@ -187,20 +114,20 @@ audioPlay=async()=>{
                 <RNCamera
                     ref={camera => this.camera = camera}
                     style={styles.preview}
-                    type={RNCamera.Constants.Type.front}
-                    flashMode={RNCamera.Constants.FlashMode.on}
+                    type={this.state.backCamera ? RNCamera.Constants.Type.back : RNCamera.Constants.Type.front}
+                    flashMode={this.state.flashMode ? RNCamera.Constants.FlashMode.on: RNCamera.Constants.FlashMode.off}
                     androidCameraPermissionOptions={{
-                      title: 'Permission to use camera',
-                      message: 'We need your permission to use your camera',
-                      buttonPositive: 'Ok',
-                      buttonNegative: 'Cancel',
-                    }}
-                    androidRecordAudioPermissionOptions={{
-                      title: 'Permission to use audio recording',
-                      message: 'We need your permission to use your audio',
-                      buttonPositive: 'Ok',
-                      buttonNegative: 'Cancel',
-                    }}
+                        title: 'Permission to use camera',
+                        message: 'We need your permission to use your camera',
+                        buttonPositive: 'Ok',
+                        buttonNegative: 'Cancel',
+                      }}
+                      androidRecordAudioPermissionOptions={{
+                        title: 'Permission to use audio recording',
+                        message: 'We need your permission to use your audio',
+                        buttonPositive: 'Ok',
+                        buttonNegative: 'Cancel',
+                      }}
                     captureAudio={this.state.captureAudio}
                 >
                     {({ camera, status, recordAudioPermissionStatus }) => {
@@ -217,7 +144,7 @@ audioPlay=async()=>{
                                             name={ this.state.flashMode ? 'ios-flash' : 'ios-flash-off' }
                                         />
                                     </TouchableOpacity> */}
-                                      {/* <TouchableOpacity
+                                 <TouchableOpacity
                                         style={styles.iconContainer}
                                         onPress={this.reverseCamera}>
                                         <IoniconsIcon
@@ -225,9 +152,9 @@ audioPlay=async()=>{
                                             size={60}
                                             color='white'
                                             name='ios-camera-reverse'
-                                        /> 
-                                    </TouchableOpacity>  */}
-                                     {/* <TouchableOpacity
+                                        />
+                                    </TouchableOpacity> 
+                                    {/* <TouchableOpacity
                                         style={styles.iconContainer}
                                         onPress={this.takePicture}>
                                         <EntypoIcon
@@ -236,14 +163,13 @@ audioPlay=async()=>{
                                             color='black'
                                             name='camera'
                                         />
-                                    </TouchableOpacity>  */}
+                                    </TouchableOpacity> */}
                                     <TouchableOpacity
                                         style={styles.iconContainer}
-                                        onPress={this.start}>
+                                        onPress={this.recordVideo}>
                                         <EntypoIcon
                                             style={styles.icon}
                                             size={40}
-                                            color='red'
                                             color={this.state.recording ? 'red' : 'white'}
                                             name='video-camera'
                                         />
@@ -253,13 +179,10 @@ audioPlay=async()=>{
                                             (null)
                                         }
                                     </TouchableOpacity>
-                                    
-                                      <Button style={{alignSelf:'flex-end',marginTop:18,marginLeft:20}}
+                                    {/* <Button style={styles.icon}
                                         title='PLAY'
                                         onPress={()=>this.props.navigation.navigate('TestHome',{linkVideo:this.state.source})}
-                                      />
-                                    
-                                   
+                                      /> */}
                                 </View>
                             );
                     }}
@@ -294,21 +217,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     icon: {
-        marginHorizontal: 16,
-        alignItems:'center',
-        justifyContent:'center',
-       
-        
-marginTop:10,
-marginBottom:20
+        marginHorizontal: 15,
         // paddingVertical: 10,
     },
     actions: {
         flex: 0,
         flexDirection: 'row',
-        alignItems:'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         width: '100%',
-        
     },
 });
